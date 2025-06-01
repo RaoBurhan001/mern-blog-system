@@ -93,7 +93,7 @@ export const deletePostService = async ({ postId, userId, role }) => {
   if (post.author.toString() !== userId && role !== 'admin') {
     throw new ErrorResponse('Not authorized to delete this post', 403);
   }
-  await post.remove();
+  await post.deleteOne();
   return;
 };
 

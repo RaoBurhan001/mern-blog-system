@@ -27,18 +27,19 @@ router.get(
 );
 
 // Public route: view a single post
-router.get('/:id', validateParams(getPostParamsSchema), getPost);
 
 // Protect all routes below
 router.use(protect);
+router.get('/:id',authorize('author', 'admin'), validateParams(getPostParamsSchema), getPost);
 
 // Author & Admin: “Get all posts” (authors only see their own; admin sees all)
 router.get('/', authorize('author', 'admin'), getPosts);
 
+router.get('/:id', authorize('author', 'admin') ,validateParams(getPostParamsSchema), getPost);
 // Only Admin can CREATE a post
 router.post(
   '/',
-  authorize('admin'),
+  authorize('admin','author'),
   apiLimiter,
   validateBody(createPostSchema),
   createPost

@@ -43,10 +43,7 @@ app.get('/api/v1/health', (req, res) => {
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/posts', postRoutes);
 
-// If you want a catch-all for unknown routes:
-// app.all('*', (req, res, next) => {
-//   res.status(404).json({ success: false, error: 'Route not found' });
-// });
+
 
 // Global error handler
 app.use(errorHandler);
